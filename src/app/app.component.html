@@ -1,0 +1,71 @@
+<h2>Students list</h2>
+
+
+
+<button (click)="m1();">Click</button>
+<table border=1px>
+<tr>
+  <th>Id</th>
+  <th>Name</th>
+</tr>
+<tr *ngFor="let s of students">
+<td>{{s.id}}</td>
+<td>{{s.name}}</td>
+</tr>
+<tr *ngIf="students.length==0">
+  <td colspan="2">No records found</td>
+</tr>
+
+</table>
+<br>
+<h1>Form Example</h1>
+<form novalidate="true" #sform="ngForm">
+  <div class="container">
+    <div class="row">
+    <div class="col-xs-12">
+        <label>Id</label>
+<input type="text" name="id" [(ngModel)]="e.eid" class="form-control"  required #idCtrl="ngModel">
+
+<span *ngIf="idCtrl.invalid" style="color:red;">
+  Please provide id
+</span><br>
+
+Name<input type="text" name="name" [(ngModel)]="e.ename" class="form-control"  required pattern="[A-Za-z]{4,25}" #nameCtrl="ngModel" >
+
+<span *ngIf="nameCtrl.touched&&nameCtrl.invalid">
+  <span *ngIf="nameCtrl.hasError('required')"  style="color:red;">
+    Please provide Name
+  </span>
+  <span *ngIf="nameCtrl.hasError('pattern')"  style="color:red;">
+    Please provide only Aphabets.Min length=4
+  </span>
+</span><br>
+Email<input type="email" name="email" [(ngModel)]="e.email"  pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" class="form-control"  required #emailCtrl="ngModel">
+<span *ngIf="emailCtrl.touched&&emailCtrl.invalid">
+  <span *ngIf="emailCtrl.hasError('required')"  style="color:red;">
+  Please provide Email
+</span>
+<span *ngIf="emailCtrl.hasError('pattern')"  style="color:red;">
+  please provide valid email
+</span></span><br>
+Phone<input type="text" name="phone" [(ngModel)]="e.phone" class="form-control" pattern="^[6-9][0-9]{9}$"  required #phoneCtrl="ngModel">
+<span *ngIf="phoneCtrl.touched&&phoneCtrl.invalid">
+  <span *ngIf="phoneCtrl.hasError('required')"  style="color:red;">
+    Please provide Phone Number
+  </span>
+  <span *ngIf="phoneCtrl.hasError('pattern')"  style="color:red;">
+    Phone Number should be atleast 10 Numbers
+  </span>
+</span><br>
+
+<button (click)="save();" [disabled]="sform.invalid" class="btn btn-primary">Save</button>
+
+</div>
+</div>
+</div>
+</form>
+
+
+
+
+
